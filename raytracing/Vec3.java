@@ -94,7 +94,7 @@ public class Vec3
 
     public String toString()
     {
-        return String.format("%s %s %s", this.x, this.y, this.z);
+        return String.format("%3.3f %3.3f %3.3f", this.x, this.y, this.z);
     }
 
     public static Vec3 add(Vec3 v1, Vec3 v2)
