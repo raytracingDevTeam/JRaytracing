@@ -10,6 +10,7 @@
 # IntelliJ IDEA
 .idea
 
-# Rendered PPM image files
 *.class
+
+# Rendered PPM image files
 *.ppm
