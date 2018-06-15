@@ -21,7 +21,11 @@ public class JRaytracing
                 float u = ((float)i) / (float)image.width();
                 float v = ((float)j) / (float)image.height();
 
-                Vec3 direction = lower_left_corner.add(Vec3.mul(horizontal, u)).add(Vec3.mul(vertical, v));
+                Vec3 a = Vec3.mul(horizontal, u);
+                Vec3 b = Vec3.mul(vertical, v);
+                Vec3 c = Vec3.add(lower_left_corner, a);
+                c = Vec3.add(c, b);
+                Vec3 direction = c;
 
                 Ray ray = new Ray(
                     origin,
