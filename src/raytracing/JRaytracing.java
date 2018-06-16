@@ -1,6 +1,6 @@
 package raytracing;
 
-//import raytracing.*;
+import raytracing.*;
 
 import java.io.*;
 import java.util.logging.*;
@@ -13,25 +13,27 @@ public class JRaytracing
 
     public static void main(String[] argv)
     {
-//        Image image = new Image(4, 2, "test.ppm");
+//        LOG.setLevel(Level.FINE);
 
-        LOG.info("Test log");
-        LOG.warning("Test");
-        LOG.fine("Fine");
-        LOG.finer("FineR");
-        LOG.finest("FineST");
+        Image image = new Image(400, 200, "test.ppm");
 
 //        Vec3 origin = new Vec3();
 //        Vec3 horizontal = new Vec3(4.0f, 0.0f, 0.0f);
 //        Vec3 vertical = new Vec3(0.0f, 2.0f, 0.0f);
 //        Vec3 lower_left_corner = new Vec3(-2.0f, -1.0f, -1.0f);
 
-//        for (int j = image.height() - 1; j >=0; --j)
+        for (int j = image.height() - 1; j >=0; --j)
         {
-//            for (int i = 0; i <= image.width(); ++i)
+            for (int i = 0; i < image.width(); ++i)
             {
-//                float u = ((float)i) / (float)image.width();
-//                float v = ((float)j) / (float)image.height();
+                float u = ((float)i) / ((float)image.width());
+                float v = ((float)j) / ((float)image.height());
+
+//                LOG.info("UV: [" + u + ", " + v + "]");
+
+                float b = 0.2f;
+
+                Color c = new Color(u, v, b);
 //
 //                Vec3 a = Vec3.mul(horizontal, u);
 //                Vec3 b = Vec3.mul(vertical, v);
@@ -45,11 +47,11 @@ public class JRaytracing
 //
 //                Color c = JRaytracing.color(ray);
 
-//                image.addPixelColor(c);
+                image.addPixelColor(c);
             }
         }
 
-//        image.write();
+        image.write();
     }
 
 
