@@ -3,4 +3,5 @@ jdk:
   - oraclejdk8
 script:
   - javac src/raytracing/*.java
+  - ls -lA src/raytracing
   - java src/raytracing/JRaytracing
