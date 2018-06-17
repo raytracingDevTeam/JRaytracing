@@ -2,5 +2,5 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - javac raytracing/*.java
-  - java raytracing/JRaytracing
+  - javac src/raytracing/*.java
+  - java src/raytracing/JRaytracing
