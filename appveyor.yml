@@ -1,5 +1,6 @@
 environment:
-  - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+  matrix:
+    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
 build_script:
   - mkdir out
   - javac -d out src/raytracing/*.java
