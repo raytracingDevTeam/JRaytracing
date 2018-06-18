@@ -2,6 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - javac src/raytracing/*.java
-  - ls -lA src/raytracing
-  - java src/raytracing/JRaytracing
+  - mkdir out
+  - javac -d out src/raytracing/*.java
+  - cd out
+  - java raytracing.JRaytracing
