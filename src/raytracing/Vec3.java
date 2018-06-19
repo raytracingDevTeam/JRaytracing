@@ -76,4 +76,9 @@ public class Vec3
                 a.x() * b.y() - a.y() * b.x()
         );
     }
+
+    public static Vec3 unit_vector(Vec3 v)
+    {
+        return Vec3.mul(v, v.length());
+    }
 }

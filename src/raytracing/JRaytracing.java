@@ -11,7 +11,7 @@ public class JRaytracing
 
     public static void main(String[] argv)
     {
-        LOG.setLevel(Level.OFF);
+        LOG.setLevel(Level.INFO);
 
         Image image = new Image(200, 100, "test.ppm");
 
@@ -36,11 +36,14 @@ public class JRaytracing
 
                 Ray ray = new Ray(origin, direction);
 
-                Color c = JRaytracing.color(ray);
+                Color c = color(ray);
 
                 image.addPixelColor(c);
             }
         }
+
+        LOG.info("Image length: " + image.pixel_count());
+        LOG.info("Image length should be: " + (image.width() * image.height() + 3));
 
         image.write();
     }
@@ -51,8 +54,18 @@ public class JRaytracing
         ray.direction().make_unit_vector();
         float t = 0.5f * (ray.direction().y() + 1.0f);
 
-        if (JRaytracing.hit_sphere(new Vec3(0.0f, 0.0f, -1.0f), 0.5f, ray))
-            return new Color(1.0f, 0.0f, 0.0f);
+        float k = hit_sphere(new Vec3(0.0f, 0.0f, -1.0f), 0.5f, ray);
+
+        if (k > 0)
+        {
+            LOG.info("T: " + k);
+            Vec3 s = Vec3.sub(ray.point_at_parameter(k), new Vec3(0.0f, 0.0f, -1.0f));
+            LOG.info("Ray at [" + t + "]: " + ray.point_at_parameter(k) + " - [0, 0, -1] = " + s);
+            Vec3 n = Vec3.unit_vector(s);
+            LOG.info("Normal vector: " + n);
+            Color N = new Color(n);
+            return N;
+        }
 
         Color white = new Color(1.0f, 1.0f, 1.0f);
         Color blue = new Color(0.3f, 0.5f, 1.0f);
@@ -63,7 +76,7 @@ public class JRaytracing
     }
 
 
-    public static boolean hit_sphere(Vec3 center, float radius, Ray r)
+    public static float hit_sphere(Vec3 center, float radius, Ray r)
     {
         Vec3 oc = Vec3.sub(r.origin(), center);
 
@@ -73,7 +86,10 @@ public class JRaytracing
 
         float discriminant = b * b - 4 * a * c;
 
-        return discriminant > 0;
+        if (discriminant < 0)
+            return -1;
+
+        return (-b - (float)Math.sqrt(discriminant)) / (2.0f * a);
     }
 
 }

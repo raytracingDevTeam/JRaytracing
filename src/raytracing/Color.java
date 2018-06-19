@@ -21,6 +21,13 @@ class Color
         this.blue = blue;
     }
 
+    public Color(Vec3 v)
+    {
+        this.red = v.x();
+        this.green = v.y();
+        this.blue = v.z();
+    }
+
     public float red() { return this.red; }
     public float green() { return this.green; }
     public float blue() { return this.blue; }

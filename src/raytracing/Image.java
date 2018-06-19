@@ -59,7 +59,8 @@ class Image
         {
             ioe.printStackTrace();
         }
-
     }
+
+    public int pixel_count() { return content_lines.size(); }
 
 }
